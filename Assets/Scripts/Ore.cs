@@ -5,16 +5,7 @@ using UnityEngine.Events;
 
 public class Ore : MonoBehaviour
 {
-    
     public bool IsDelivered { get; private set;}
-
-    /*private void OnTriggerEnter(Collider trigger)
-    {
-        if (trigger.TryGetComponent<Base>(out Base soldier))
-        {
-            Destroy(gameObject);
-        }
-    }*/
 
     public void IsTaken()
     {

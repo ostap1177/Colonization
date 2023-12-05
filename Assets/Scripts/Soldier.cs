@@ -19,7 +19,7 @@ public class Soldier : MonoBehaviour
         _baseTransform = transform;
     }
 
-    void Update()
+    private void Update()
     {
         Move(_targetTransform);
     }

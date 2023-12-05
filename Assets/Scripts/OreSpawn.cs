@@ -9,6 +9,7 @@ public class OreSpawn : MonoBehaviour
     [SerializeField] private Ore _ore;
     [SerializeField] private int _oreLimit;
     [SerializeField] private int _delaySpawn;
+
     private Transform _transform;
     private int _childCountOnStart;
     private Vector3 _spawnBound;

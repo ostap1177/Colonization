@@ -17,6 +17,11 @@ public class Base : MonoBehaviour
     private Queue <Soldier> _soldiers;
     private Transform _transform;
 
+    private void Awake()
+    {
+        _oreCounterForBase = GetComponent<OreCounterForBase>();
+    }
+
     private void OnEnable()
     {
         _oreSpawn.OreSpawned += OnSpawnedOre;
@@ -25,11 +30,6 @@ public class Base : MonoBehaviour
     private void OnDisable()
     {
         _oreSpawn.OreSpawned -= OnSpawnedOre;
-    }
-
-    private void Awake()
-    {
-        _oreCounterForBase = GetComponent<OreCounterForBase>();
     }
 
     private void Start()
