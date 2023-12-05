@@ -12,12 +12,12 @@ public class DisplayOre : MonoBehaviour
 
     private void OnEnable()
     {
-        _oreCounterForBase.AddedOrePoint += OnDisplayCounOre;
+        _oreCounterForBase.AddedOrePoint += OnAddedOrePoint;
     }
 
     private void OnDisable()
     {
-        _oreCounterForBase.AddedOrePoint += OnDisplayCounOre;
+        _oreCounterForBase.AddedOrePoint += OnAddedOrePoint;
     }
 
     private void Start()
@@ -25,8 +25,8 @@ public class DisplayOre : MonoBehaviour
         _text.text = $"{_nameText}: 0";
     }
 
-    private void OnDisplayCounOre(int countOre)
+    private void OnAddedOrePoint(int point)
     {
-        _text.text = $"{_nameText}: {countOre}";
+        _text.text = $"{_nameText}: {point}";
     }
 }

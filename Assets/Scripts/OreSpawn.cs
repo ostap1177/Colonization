@@ -21,7 +21,7 @@ public class OreSpawn : MonoBehaviour
 
     public event UnityAction<Transform> OreSpawned;
 
-    private void Start()
+    private void Awake()
     {
         _transform = transform;
         _childCountOnStart = _transform.childCount;

@@ -20,6 +20,11 @@ public class Base : MonoBehaviour
     private void Awake()
     {
         _oreCounterForBase = GetComponent<OreCounterForBase>();
+
+        _soldiersAll = new List<Soldier>();
+        _transformsOre = new Queue<Transform>();
+        _soldiers = new Queue<Soldier>();
+        _transform = transform;
     }
 
     private void OnEnable()
@@ -34,11 +39,6 @@ public class Base : MonoBehaviour
 
     private void Start()
     {
-        _soldiersAll = new List<Soldier>();
-        _transformsOre = new Queue<Transform>();
-        _soldiers = new Queue<Soldier>();
-        _transform = transform;
-
         CreateSoldiers();
     }
 

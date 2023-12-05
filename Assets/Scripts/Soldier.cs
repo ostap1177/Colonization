@@ -13,7 +13,7 @@ public class Soldier : MonoBehaviour
 
     public bool IsDirected => _isDirected;
 
-    private void Start()
+    private void Awake()
     {
         _transform = transform;
         _baseTransform = transform;
@@ -21,7 +21,7 @@ public class Soldier : MonoBehaviour
 
     private void Update()
     {
-        Move(_targetTransform);
+        Move();
     }
 
     public void SetSpeed(float speed)
@@ -39,7 +39,7 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    private void Move(Transform targetTransform)
+    private void Move()
     {
         if (_targetTransform != null)
         {
