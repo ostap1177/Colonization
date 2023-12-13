@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &464673368 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6989171480159131581, guid: 963a8f66337c5422c92a6cf77ad99755, type: 3}
-  m_PrefabInstance: {fileID: 6989171479170087308}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03fd805a952b472ca11264d1d339daf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eba4a88814141828c421ad0a19d498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _oreCounterForBase: {fileID: 9140753625883120369}
+  _oreCounterForBase: {fileID: 9140753625883120379}
   _text: {fileID: 1604337580}
   _nameText: Ore in Base
 --- !u!114 &1604337580
@@ -696,21 +685,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 707725971645508663, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
-      propertyPath: _oreSpawn
-      value: 
-      objectReference: {fileID: 464673368}
-    - target: {fileID: 707725971645508663, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
-      propertyPath: _offsetSpawnPositionSoldier.y
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 9140753625973010834, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
       propertyPath: m_Name
       value: Base
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140753625973010835, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9140753625973010838, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
       propertyPath: m_RootOrder
@@ -758,9 +735,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
---- !u!114 &9140753625883120369 stripped
+--- !u!114 &9140753625883120379 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1988100104, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9140753625883120379, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
   m_PrefabInstance: {fileID: 9140753625883120368}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OreCounterForBase : MonoBehaviour
+public class OreCounter : MonoBehaviour
 {
     private int _oreCountPoint;
 
@@ -11,7 +9,7 @@ public class OreCounterForBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider trigger)
     {
-        if (trigger.TryGetComponent<Soldier>(out Soldier soldier))
+        if (trigger.TryGetComponent(out Soldier soldier))
         {
             if (soldier.IsDirected == true && soldier.GetComponentInChildren<Ore>(true))
             {

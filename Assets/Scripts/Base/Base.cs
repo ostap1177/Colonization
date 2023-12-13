@@ -1,16 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(OreCounterForBase))]
+[RequireComponent(typeof(OreCounter))]
 public class Base : MonoBehaviour
 {
-    [SerializeField] private OreSpawn _oreSpawn;
+    [SerializeField] private ScanLevel _scanLevel;
     [SerializeField] private Soldier _soldierPrefab;
     [SerializeField] private float _soldierSpeed;
     [SerializeField] private Vector3 _offsetSpawnPositionSoldier = new Vector3(0, -0.1f, 0);
 
-    private OreCounterForBase _oreCounterForBase;
+    private OreCounter _oreCounterForBase;
     private Queue <Transform> _transformsOre;
     private int _limitSoldiers = 3;
     private List<Soldier> _soldiersAll;
@@ -19,7 +18,7 @@ public class Base : MonoBehaviour
 
     private void Awake()
     {
-        _oreCounterForBase = GetComponent<OreCounterForBase>();
+        _oreCounterForBase = GetComponent<OreCounter>();
 
         _soldiersAll = new List<Soldier>();
         _transformsOre = new Queue<Transform>();
@@ -29,12 +28,12 @@ public class Base : MonoBehaviour
 
     private void OnEnable()
     {
-        _oreSpawn.OreSpawned += OnSpawnedOre;
+        _scanLevel.OreFounded += OnSpawnedOre;
     }
 
     private void OnDisable()
     {
-        _oreSpawn.OreSpawned -= OnSpawnedOre;
+        _scanLevel.OreFounded -= OnSpawnedOre;
     }
 
     private void Start()
