@@ -1,126 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1016459952
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1016459953}
-  - component: {fileID: 1016459955}
-  - component: {fileID: 1016459954}
-  m_Layer: 0
-  m_Name: ScanLevel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1016459953
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016459952}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9140753625973010838}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1016459955
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016459952}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1016459954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016459952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7573411ea0a8940c59ee0cba9f4e7336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scanDistance: 45
-  _scanSpeed: 3
---- !u!1 &1289302924
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1289302925}
-  - component: {fileID: 1289302927}
-  - component: {fileID: 1289302926}
-  m_Layer: 0
-  m_Name: OreCounter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1289302925
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289302924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9140753625973010838}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1289302927
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289302924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1289302926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289302924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c372f218035644618608dfdc40a939d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _oreForCreateBase: 3
-  _oreForCreateSoldier: 2
 --- !u!1 &9140753625973010834
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,9 +11,10 @@ GameObject:
   - component: {fileID: 9140753625973010838}
   - component: {fileID: 9140753625973010837}
   - component: {fileID: 9140753625973010836}
+  - component: {fileID: 9140753625973010835}
   - component: {fileID: 1988100103}
   - component: {fileID: 707725971645508663}
-  - component: {fileID: -4993330075600211078}
+  - component: {fileID: 1988100104}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -153,9 +33,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -5.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1289302925}
-  - {fileID: 1016459953}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,6 +87,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &9140753625973010835
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9140753625973010834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1988100103
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237,13 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d59235ee00245d593b9d5ace9d6f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickHandler: {fileID: 0}
-  _scanLevel: {fileID: 1016459954}
-  _oreCounterForBase: {fileID: 1289302926}
-  _soldierSpawn: {fileID: -4993330075600211078}
-  _flagPrefab: {fileID: 8835238663491218319, guid: d28095356bf9c4d28954fc4766de009d, type: 3}
-  _limitSoldiers: 2
---- !u!114 &-4993330075600211078
+  _oreSpawn: {fileID: 0}
+  _soldierPrefab: {fileID: 8867760821582296750, guid: 3277a2aa4c2e3429bada333b11734cf7, type: 3}
+  _soldierSpeed: 3
+  _offsetSpawnPositionSoldier: {x: 0, y: -0.1, z: 0}
+--- !u!114 &1988100104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,9 +142,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9140753625973010834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 029183a33df374900a396941273d74c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c372f218035644618608dfdc40a939d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soldierPrefab: {fileID: 8867760821582296750, guid: 3277a2aa4c2e3429bada333b11734cf7, type: 3}
-  _soldierSpeed: 10
-  _offsetSpawnPositionSoldier: {x: 0, y: -0.5, z: 0}
