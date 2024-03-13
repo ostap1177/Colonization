@@ -533,7 +533,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   _oreCounterForBase: {fileID: 9140753625883120369}
+=======
+  _oreCounterForBase: {fileID: 9140753625883120379}
+>>>>>>> parent of 1a32865 (Colonization)
 =======
   _oreCounterForBase: {fileID: 9140753625883120379}
 >>>>>>> parent of 1a32865 (Colonization)
@@ -701,6 +705,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 707725971645508663, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
       propertyPath: _oreSpawn
       value: 
@@ -709,6 +714,8 @@ PrefabInstance:
       propertyPath: _offsetSpawnPositionSoldier.y
       value: -0.5
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of 1a32865 (Colonization)
 =======
 >>>>>>> parent of 1a32865 (Colonization)
     - target: {fileID: 9140753625973010834, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
@@ -766,9 +773,15 @@ PrefabInstance:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &9140753625883120369 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1988100104, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
+=======
+--- !u!114 &9140753625883120379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9140753625883120379, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
+>>>>>>> parent of 1a32865 (Colonization)
 =======
 --- !u!114 &9140753625883120379 stripped
 MonoBehaviour:

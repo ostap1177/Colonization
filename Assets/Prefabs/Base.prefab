@@ -15,7 +15,13 @@ GameObject:
   - component: {fileID: 1988100103}
   - component: {fileID: 707725971645508663}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 1988100104}
+=======
+  - component: {fileID: 9140753625883120371}
+  - component: {fileID: 9140753625883120370}
+  - component: {fileID: 9140753625883120379}
+>>>>>>> parent of 1a32865 (Colonization)
 =======
   - component: {fileID: 9140753625883120371}
   - component: {fileID: 9140753625883120370}
@@ -102,7 +108,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 9140753625973010834}
   m_Material: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsTrigger: 0
+=======
+  m_IsTrigger: 1
+>>>>>>> parent of 1a32865 (Colonization)
 =======
   m_IsTrigger: 1
 >>>>>>> parent of 1a32865 (Colonization)
@@ -140,12 +150,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   _oreSpawn: {fileID: 0}
   _soldierPrefab: {fileID: 8867760821582296750, guid: 3277a2aa4c2e3429bada333b11734cf7, type: 3}
   _soldierSpeed: 3
   _offsetSpawnPositionSoldier: {x: 0, y: -0.1, z: 0}
 --- !u!114 &1988100104
 =======
+=======
+>>>>>>> parent of 1a32865 (Colonization)
   _scanLevel: {fileID: 9140753625883120370}
   _soldierPrefab: {fileID: 8867760821582296750, guid: 3277a2aa4c2e3429bada333b11734cf7, type: 3}
   _soldierSpeed: 3
@@ -164,6 +177,9 @@ BoxCollider:
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9140753625883120370
+<<<<<<< HEAD
+>>>>>>> parent of 1a32865 (Colonization)
+=======
 >>>>>>> parent of 1a32865 (Colonization)
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +190,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 1a32865 (Colonization)
   m_Script: {fileID: 11500000, guid: 684d13ff747e646d6a73613fa03c7f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -188,6 +207,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9140753625973010834}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
+>>>>>>> parent of 1a32865 (Colonization)
+=======
 >>>>>>> parent of 1a32865 (Colonization)
   m_Script: {fileID: 11500000, guid: 0c372f218035644618608dfdc40a939d, type: 3}
   m_Name: 
