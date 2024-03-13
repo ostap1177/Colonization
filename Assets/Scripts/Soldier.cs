@@ -49,7 +49,11 @@ public class Soldier : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD
         if (other.TryGetComponent<Ore>(out Ore ore) == true && ore.IsDelivered==false)
+=======
+        if (other.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
+>>>>>>> parent of 1a32865 (Colonization)
         {   
             ore.IsTaken();
             ore.gameObject.transform.parent = _transform;
@@ -57,7 +61,11 @@ public class Soldier : MonoBehaviour
             _targetTransform = _baseTransform;
         }
 
+<<<<<<< HEAD
         if (other.TryGetComponent<Base>(out Base Base) == true && _ore !=null)
+=======
+        if (other.TryGetComponent(out Base Base) == true && _ore !=null)
+>>>>>>> parent of 1a32865 (Colonization)
         {
             _isDirected = false;
             _ore.DestroyOre();
