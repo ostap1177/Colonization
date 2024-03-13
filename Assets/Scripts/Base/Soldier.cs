@@ -29,6 +29,12 @@ public class Soldier : MonoBehaviour
 
     public void SetDirection(Transform targetTransform, Transform baseTransform)
     {
+        if (targetTransform.TryGetComponent(out Flag flag) == true)
+        {
+            _targetTransform = flag.transform;
+            _baseTransform = flag.transform;
+        }
+
         if (targetTransform != null && baseTransform != null && targetTransform != baseTransform)
         {
             _isDirected = true;
@@ -42,6 +48,7 @@ public class Soldier : MonoBehaviour
         if (_targetTransform != null)
         {
             _transform.position = Vector3.MoveTowards(_transform.position, _targetTransform.position, _speed * Time.deltaTime);
+            Debug.Log($"Obj-{name} + Target transfom-{_targetTransform.name}");
         }
     }
 

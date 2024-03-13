@@ -31,8 +31,8 @@ public class Flag : MonoBehaviour
 
     public void PrepareNewBase(Soldier soldier)
     {
-        soldier.transform.parent = _transform;
-        soldier.SetDirection(_transform, _transform);
+        soldier.transform.parent = transform;
+        soldier.SetDirection(transform, transform);
     }
 
     //private void CreatingNewBase()
