@@ -45,9 +45,9 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (other.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
+        if (_ore == null && collider.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
         {   
             ore.IsTaken();
             ore.gameObject.transform.parent = _transform;
@@ -55,7 +55,7 @@ public class Soldier : MonoBehaviour
             _targetTransform = _baseTransform;
         }
 
-        if (other.TryGetComponent(out Base Base) == true && _ore !=null)
+        if (collider.TryGetComponent(out OreCounter oreCounter) == true && _ore !=null)
         {
             _isDirected = false;
             _ore.DestroyOre();

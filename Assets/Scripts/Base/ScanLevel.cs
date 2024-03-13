@@ -37,7 +37,11 @@ public class ScanLevel : MonoBehaviour
     {
         if (trigger.TryGetComponent(out Ore ore))
         {
-            OreFounded?.Invoke(ore.transform);
+            if (ore.IsScanned == false)
+            {
+                ore.IsScaning();
+                OreFounded?.Invoke(ore.transform);
+            }
         }
     }
 
@@ -59,7 +63,6 @@ public class ScanLevel : MonoBehaviour
         {
             _collider.size = new Vector3( _collider.size.x*_stepScan,_collider.size.y, _collider.size.z * _stepScan) ;
             yield return _waitForSeconds;
-            Debug.Log(_collider.size);
         }
 
         _collider.size = _startScaleScan;

@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class DisplayOre : MonoBehaviour
 {
-    [SerializeField] private OreCounter _oreCounterForBase;
+    [SerializeField] private OreCounter _base;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private string _nameText;
 
     private void OnEnable()
     {
-        _oreCounterForBase.AddedOrePoint += OnAddedOrePoint;
+        _base.ShowOrePoint += OnShowOrePoint;
     }
 
     private void OnDisable()
     {
-        _oreCounterForBase.AddedOrePoint += OnAddedOrePoint;
+        _base.ShowOrePoint += OnShowOrePoint;
     }
 
     private void Start()
@@ -22,7 +22,7 @@ public class DisplayOre : MonoBehaviour
         _text.text = $"{_nameText}: 0";
     }
 
-    private void OnAddedOrePoint(int point)
+    private void OnShowOrePoint(int point)
     {
         _text.text = $"{_nameText}: {point}";
     }

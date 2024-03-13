@@ -1,63 +1,105 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(OreCounter))]
 public class Base : MonoBehaviour
 {
-    [SerializeField] private ScanLevel _scanLevel;
-    [SerializeField] private Soldier _soldierPrefab;
-    [SerializeField] private float _soldierSpeed;
-    [SerializeField] private Vector3 _offsetSpawnPositionSoldier = new Vector3(0, -0.1f, 0);
+    [SerializeField] private ClickHandler _clickHandler;
+    [SerializeField] private ScanLevelToRay _scanLevel;
+    [SerializeField] private OreCounter _oreCounterForBase;
+    [SerializeField] private SoldierSpawn _soldierSpawn;
+    [SerializeField] private Flag _flagPrefab;
+    [SerializeField] private int _limitSoldiers;
 
-    private OreCounter _oreCounterForBase;
+    //public event UnityAction CreatingNewBase;
+
     private Queue <Transform> _transformsOre;
-    private int _limitSoldiers = 3;
+
     private List<Soldier> _soldiersAll;
     private Queue <Soldier> _soldiers;
+
     private Transform _transform;
+    private Flag _flag;
+    private Transform _flagTransform;
+
+    private bool _isClickOnBase = false;
+    private bool _isPutFlag;
+    private bool _isSufficeCreatinSoldier;
+    private bool _isSufficeCreatinBase;
 
     private void Awake()
     {
-        _oreCounterForBase = GetComponent<OreCounter>();
-
         _soldiersAll = new List<Soldier>();
         _transformsOre = new Queue<Transform>();
         _soldiers = new Queue<Soldier>();
         _transform = transform;
+
+        _limitSoldiers++;
+
+        CreateFlag();
     }
 
     private void OnEnable()
     {
         _scanLevel.OreFounded += OnSpawnedOre;
+
+        _oreCounterForBase.ReachedCreateSoldiers += OnReachedCreateSoldiers;
+        _oreCounterForBase.ReachedCreateBase += OnReachedCreateBase;
+
+        _clickHandler.ClickedNotBase += OnClickedNotBase;
+        _clickHandler.GetedClickPoint += OnGetedClickPoint;
     }
 
     private void OnDisable()
     {
         _scanLevel.OreFounded -= OnSpawnedOre;
+
+        _oreCounterForBase.ReachedCreateSoldiers += OnReachedCreateSoldiers;
+        _oreCounterForBase.ReachedCreateBase += OnReachedCreateBase;
+
+        _clickHandler.ClickedNotBase -= OnClickedNotBase;
+        _clickHandler.GetedClickPoint -= OnGetedClickPoint;
     }
 
     private void Start()
     {
-        CreateSoldiers();
+        AddedSoldier(_soldierSpawn.CreateSoldiers());
     }
 
     private void FixedUpdate()
     {
-        SendSodier();
+        ControlSoldiers();
     }
 
-    private void CreateSoldiers()
+    private void ControlSoldiers()
     {
-        for (int i=0; i<_limitSoldiers ; i++ )
+        SendSodierOre();
+
+        if (_isPutFlag == true && _soldiersAll.Count > 1)
         {
-            Soldier soldier = Instantiate(_soldierPrefab, _transform.position + _offsetSpawnPositionSoldier, Quaternion.identity, _transform);
-            soldier.SetSpeed(_soldierSpeed);
-            _soldiersAll.Add(soldier);
-            _soldiers.Enqueue(soldier);
+            if (_isSufficeCreatinBase == true)
+            {
+                SendSodierCreatingBase();
+            }
+        }
+        else
+        {
+            if (_isSufficeCreatinSoldier == true && _soldiersAll.Count < _limitSoldiers)
+            {
+                AddedSoldier(_soldierSpawn.CreateSoldiers());
+
+                _oreCounterForBase.SubtractPoint(_oreCounterForBase.OreForCreateSoldier);
+                _isSufficeCreatinSoldier = false;
+            }
+            else if (_soldiersAll.Count == _limitSoldiers)
+            {
+                _isSufficeCreatinSoldier = false;
+            }
         }
     }
 
-    private void SendSodier()
+    private void SendSodierOre()
     {
         if (_transformsOre.Count > 0)
         {
@@ -78,8 +120,77 @@ public class Base : MonoBehaviour
         }
     }
 
+    private void SendSodierCreatingBase()
+    {   
+        if (_soldiers.Count != 0 )
+        {
+            _isPutFlag = false;
+            _isSufficeCreatinBase = false;
+            _oreCounterForBase.SubtractPoint(_oreCounterForBase.OreForCreateBase);
+
+            Soldier soldier = _soldiers.Dequeue();
+            _flag.PrepareNewBase(soldier);
+            _soldiersAll.Remove(soldier);
+
+            _flag.transform.parent = null;
+            CreateFlag();
+        }
+    }
+
+    private void AddedSoldier(Soldier soldier)
+    {
+        _soldiersAll.Add(soldier);
+        _soldiers.Enqueue(soldier);
+    }
+
+    private void CreateFlag()
+    {
+        _flag = Instantiate(_flagPrefab, _transform);
+        _flagTransform = _flag.transform;
+        _flag.gameObject.SetActive(false);
+    }
+
+    public void ClickedBase(bool isBaseClicked)
+    {
+        _isClickOnBase = isBaseClicked;
+    }
+
+    private void OnReachedCreateBase()
+    {
+       _isSufficeCreatinBase = true;
+    }
+
+    private void OnReachedCreateSoldiers()
+    {
+        _isSufficeCreatinSoldier = true;
+    }
+
     private void OnSpawnedOre(Transform transform)
     {
         _transformsOre.Enqueue(transform);
+    }
+
+    private void OnClickedNotBase()
+    {
+        _isClickOnBase = false;   
+    }
+
+    private void OnGetedClickPoint(Vector3 instalPosition)
+    {
+        if (_flag != null && _isClickOnBase == true)
+        {
+            if (_flag.gameObject.activeSelf == false)
+            {
+                _flag.gameObject.SetActive(true);
+                _flag.transform.position = instalPosition;
+                _isPutFlag = true;
+            }
+            else
+            {
+                _flag.transform.position = instalPosition;
+            }
+        }
+
+        _isClickOnBase = false;
     }
 }

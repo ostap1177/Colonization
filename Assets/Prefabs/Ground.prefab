@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6989171480159131555}
   - component: {fileID: 6989171480159131554}
   - component: {fileID: 6989171480159131553}
-  - component: {fileID: 6989171480159131581}
+  - component: {fileID: 321924080}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6989171480159131581
+--- !u!114 &321924080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,13 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6989171480159131552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03fd805a952b472ca11264d1d339daf, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e5d91ebc72cd465dbb19afee4a0a732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnTerritory: {fileID: 6989171480630343267}
-  _ore: {fileID: 7815362824158152453, guid: 60918959da3f640fba31559f44f98ae3, type: 3}
-  _oreLimit: 3
-  _delaySpawn: 2
 --- !u!1 &6989171480630343265
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +121,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6989171480630343266}
   - component: {fileID: 6989171480630343267}
+  - component: {fileID: 56002759}
+  - component: {fileID: 56002761}
   m_Layer: 0
   m_Name: SpawnTerritory
   m_TagString: Untagged
@@ -160,3 +158,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.95, y: 1, z: 0.95}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &56002759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989171480630343265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03fd805a952b472ca11264d1d339daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnTerritory: {fileID: 6989171480630343267}
+  _ore: {fileID: 7815362824158152453, guid: 60918959da3f640fba31559f44f98ae3, type: 3}
+  _oreLimit: 3
+  _delaySpawn: 2
+--- !u!114 &56002761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989171480630343265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9292b252add4dbc8c83cf0c9d319a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickHandler: {fileID: 0}
+  _flagPrefab: {fileID: 8835238663491218319, guid: d28095356bf9c4d28954fc4766de009d, type: 3}
