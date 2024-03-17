@@ -1,64 +1,99 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(OreCounterForBase))]
 public class Base : MonoBehaviour
 {
-    [SerializeField] private OreSpawn _oreSpawn;
-    [SerializeField] private Soldier _soldierPrefab;
-    [SerializeField] private float _soldierSpeed;
-    [SerializeField] private Vector3 _offsetSpawnPositionSoldier = new Vector3(0, -0.1f, 0);
+    [SerializeField] private ScanLevelToRay _scanLevel;
+    [SerializeField] private OreCounter _oreCounter;
+    [SerializeField] private SoldierSpawn _soldierSpawn;
+    [SerializeField] private FlugSpawner _flugSpawner;
+    [SerializeField] private int _limitSoldiers;
+    [SerializeField] private int _oreCreateBase;
+    [SerializeField] private int _oreCreateSoldier;
 
-    private OreCounterForBase _oreCounterForBase;
     private Queue <Transform> _transformsOre;
-    private int _limitSoldiers = 3;
+
     private List<Soldier> _soldiersAll;
     private Queue <Soldier> _soldiers;
+
     private Transform _transform;
+    private Flag _flag;
+
+    private bool _isClickOnBase = false;
+    private bool _isPutFlag;
 
     private void Awake()
     {
-        _oreCounterForBase = GetComponent<OreCounterForBase>();
-
         _soldiersAll = new List<Soldier>();
         _transformsOre = new Queue<Transform>();
         _soldiers = new Queue<Soldier>();
         _transform = transform;
+
+        _limitSoldiers++;
+
+        CreateFlag();
     }
 
     private void OnEnable()
     {
-        _oreSpawn.OreSpawned += OnSpawnedOre;
+        _scanLevel.OreFounded += OnSpawnedOre;
     }
 
     private void OnDisable()
     {
-        _oreSpawn.OreSpawned -= OnSpawnedOre;
+        _scanLevel.OreFounded -= OnSpawnedOre;
     }
 
     private void Start()
     {
-        CreateSoldiers();
+        AddedSoldier(_soldierSpawn.CreateSoldiers());
     }
 
     private void FixedUpdate()
     {
-        SendSodier();
+        ControlSoldiers();
     }
 
-    private void CreateSoldiers()
+    public void ClickedBase(bool isBaseClicked)
     {
-        for (int i=0; i<_limitSoldiers ; i++ )
+        _isClickOnBase = isBaseClicked;
+    }
+
+    public void GetClickPoint(Vector3 instalPosition)
+    {
+        if (_flag != null && _isClickOnBase == true)
         {
-            Soldier soldier = Instantiate(_soldierPrefab, _transform.position + _offsetSpawnPositionSoldier, Quaternion.identity, _transform);
-            soldier.SetSpeed(_soldierSpeed);
-            _soldiersAll.Add(soldier);
-            _soldiers.Enqueue(soldier);
+            if (_flag.gameObject.activeSelf == false)
+            {
+                _flag.gameObject.SetActive(true);
+                _isPutFlag = true;
+            }
+
+            _flag.Instal(instalPosition);
         }
     }
 
-    private void SendSodier()
+    private void ControlSoldiers()
+    {
+        SendSodierOre();
+
+        if (_isPutFlag == true && _soldiersAll.Count > 1)
+        {
+            if (_oreCounter.CanSpawn(_oreCreateBase) == true)
+            {
+                SendSodierCreatingBase();
+            }
+        }
+        else
+        {
+            if (_oreCounter.CanSpawn(_oreCreateSoldier) && _soldiersAll.Count < _limitSoldiers)
+            {
+                AddedSoldier(_soldierSpawn.CreateSoldiers());
+            }
+        }
+    }
+
+    private void SendSodierOre()
     {
         if (_transformsOre.Count > 0)
         {
@@ -77,6 +112,32 @@ public class Base : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SendSodierCreatingBase()
+    {   
+        if (_soldiers.Count != 0 )
+        {
+            _oreCounter.RemovePoint(_oreCreateBase);
+
+            Soldier soldier = _soldiers.Dequeue();
+            _soldiersAll.Remove(soldier);
+            soldier.SetDirection(_flag.transform,_transform);
+        }
+    }
+
+    private void AddedSoldier(Soldier soldier)
+    {
+        _soldiersAll.Add(soldier);
+        _soldiers.Enqueue(soldier);
+        _oreCounter.RemovePoint(_oreCreateSoldier);
+    }
+
+    private void CreateFlag()
+    {
+        _flag = _flugSpawner.Crete(_transform.position);
+        _flag.transform.parent = _transform;
+        _flag.gameObject.SetActive(false);
     }
 
     private void OnSpawnedOre(Transform transform)
