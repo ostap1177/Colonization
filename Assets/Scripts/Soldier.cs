@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Soldier : MonoBehaviour
@@ -29,12 +31,6 @@ public class Soldier : MonoBehaviour
 
     public void SetDirection(Transform targetTransform, Transform baseTransform)
     {
-        if (targetTransform.TryGetComponent(out Flag flag) == true)
-        {
-            _targetTransform = flag.transform;
-            _baseTransform = flag.transform;
-        }
-
         if (targetTransform != null && baseTransform != null && targetTransform != baseTransform)
         {
             _isDirected = true;
@@ -48,13 +44,12 @@ public class Soldier : MonoBehaviour
         if (_targetTransform != null)
         {
             _transform.position = Vector3.MoveTowards(_transform.position, _targetTransform.position, _speed * Time.deltaTime);
-            Debug.Log($"Obj-{name} + Target transfom-{_targetTransform.name}");
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
-        if (_ore == null && collider.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
+        if (other.TryGetComponent<Ore>(out Ore ore) == true && ore.IsDelivered==false)
         {   
             ore.IsTaken();
             ore.gameObject.transform.parent = _transform;
@@ -62,7 +57,7 @@ public class Soldier : MonoBehaviour
             _targetTransform = _baseTransform;
         }
 
-        if (collider.TryGetComponent(out OreCounter oreCounter) == true && _ore !=null)
+        if (other.TryGetComponent<Base>(out Base Base) == true && _ore !=null)
         {
             _isDirected = false;
             _ore.DestroyOre();
