@@ -6,15 +6,7 @@ using UnityEngine.UI;
 
 public class DisplayOre : MonoBehaviour
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
     [SerializeField] private OreCounterForBase _oreCounterForBase;
-=======
-    [SerializeField] private OreCounter _oreCounterForBase;
->>>>>>> parent of 1a32865 (Colonization)
-=======
-    [SerializeField] private OreCounter _oreCounterForBase;
->>>>>>> parent of 1a32865 (Colonization)
     [SerializeField] private TMP_Text _text;
     [SerializeField] private string _nameText;
 
