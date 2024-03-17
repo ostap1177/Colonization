@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 2133598566}
   - component: {fileID: 2133598565}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DispayOre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,9 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eba4a88814141828c421ad0a19d498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 1289302926}
+  _oreCounter: {fileID: 1289302926}
   _text: {fileID: 2133598566}
-  _nameText: 
 --- !u!1 &9140753625973010834
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +384,7 @@ GameObject:
   - component: {fileID: 1988100103}
   - component: {fileID: 707725971645508663}
   - component: {fileID: -4993330075600211078}
+  - component: {fileID: 698374481}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -489,12 +489,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scanLevel: {fileID: 1016459954}
-  _oreCounter: {fileID: 0}
+  _oreCounter: {fileID: 1289302926}
   _soldierSpawn: {fileID: -4993330075600211078}
-  _putFlug: {fileID: 0}
-  _limitSoldiers: 2
-  _oreCreateBase: 0
-  _oreCreateSoldier: 0
+  _flugSpawner: {fileID: 698374481}
+  _limitSoldiers: 3
+  _oreCreateBase: 2
+  _oreCreateSoldier: 1
 --- !u!114 &-4993330075600211078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,3 +510,16 @@ MonoBehaviour:
   _soldierPrefab: {fileID: 8867760821582296750, guid: 3277a2aa4c2e3429bada333b11734cf7, type: 3}
   _soldierSpeed: 10
   _offsetSpawnPositionSoldier: {x: 0, y: -0.5, z: 0}
+--- !u!114 &698374481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9140753625973010834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9292b252add4dbc8c83cf0c9d319a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flagPrefab: {fileID: 8835238663491218319, guid: d28095356bf9c4d28954fc4766de009d, type: 3}

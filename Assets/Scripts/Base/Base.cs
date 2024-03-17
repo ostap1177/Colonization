@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Base : MonoBehaviour
 {
     [SerializeField] private ScanLevelToRay _scanLevel;
     [SerializeField] private OreCounter _oreCounter;
     [SerializeField] private SoldierSpawn _soldierSpawn;
-    [SerializeField] private PutFlug _putFlug;
+    [SerializeField] private FlugSpawner _flugSpawner;
     [SerializeField] private int _limitSoldiers;
     [SerializeField] private int _oreCreateBase;
     [SerializeField] private int _oreCreateSoldier;
@@ -68,17 +66,11 @@ public class Base : MonoBehaviour
             if (_flag.gameObject.activeSelf == false)
             {
                 _flag.gameObject.SetActive(true);
-
-                _flag.transform.position = instalPosition;
                 _isPutFlag = true;
             }
-            else
-            {
-                _flag.transform.position = instalPosition;
-            }
-        }
 
-        _isClickOnBase = false;
+            _flag.Instal(instalPosition);
+        }
     }
 
     private void ControlSoldiers()
@@ -126,11 +118,11 @@ public class Base : MonoBehaviour
     {   
         if (_soldiers.Count != 0 )
         {
-            _isPutFlag = false;
             _oreCounter.RemovePoint(_oreCreateBase);
 
             Soldier soldier = _soldiers.Dequeue();
             _soldiersAll.Remove(soldier);
+            soldier.SetDirection(_flag.transform,_transform);
         }
     }
 
@@ -143,7 +135,8 @@ public class Base : MonoBehaviour
 
     private void CreateFlag()
     {
-        _flag = _putFlug.CreteFlag(_transform.position);
+        _flag = _flugSpawner.Crete(_transform.position);
+        _flag.transform.parent = _transform;
         _flag.gameObject.SetActive(false);
     }
 

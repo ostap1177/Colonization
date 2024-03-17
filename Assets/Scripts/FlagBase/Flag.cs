@@ -1,48 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
+    [SerializeField] SpawnBase _spawnBase;
+
     private Transform _transform;
-    private Base _parentBase;
 
-    //private void OnEnable()
-    //{
-    //    _parentBase.CreatingNewBase += OnCreatingNewBase;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _parentBase.CreatingNewBase -= OnCreatingNewBase;
-    //}
-
-    //private void Start()
-    //{
-    //    if (_transform.parent != null)
-    //    {
-    //        if (_transform.parent.TryGetComponent(out Base parentBase) == true)
-    //        {
-    //            _parentBase = parentBase;
-    //        }
-    //    }
-    //}
-
-    public void PrepareNewBase(Soldier soldier)
+    private void Awake()
     {
-        soldier.transform.parent = _transform;
-        soldier.SetDirection(_transform, _transform);
+        _transform = transform;
     }
 
-    //private void CreatingNewBase()
-    //{
-    //    if (_transform.childCount > 0)
-    //    {
-    //        if (_transform.GetChild(0).TryGetComponent(out Soldier soldier) == true)
-    //        {
-    //            soldier.SetDirection(_transform, _transform);
-    //        }
-    //    }
-    //}
+    public void Instal(Vector3 poinInstal)
+    {
+        _transform.position = poinInstal;
+    }
+
+    private void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.TryGetComponent(out Soldier soldier) == true && soldier.IsDirectionNewBase == true)
+        {
+            Base newBase = _spawnBase.Create(_transform.position);
+            soldier.transform.parent = newBase.transform;
+            _transform.gameObject.SetActive(false);
+        }
+    }
 }

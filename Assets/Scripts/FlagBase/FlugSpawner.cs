@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PutFlug : MonoBehaviour
+public class FlugSpawner : MonoBehaviour
 {
     [SerializeField] private Flag _flagPrefab;
 
-    public Flag CreteFlag(Vector3 createPosition)
+    public Flag Crete(Vector3 createPosition)
     {
         return Instantiate(_flagPrefab, createPosition, Quaternion.identity);
     }

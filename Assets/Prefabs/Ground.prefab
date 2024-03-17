@@ -181,10 +181,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989171480630343265}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a9292b252add4dbc8c83cf0c9d319a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickHandler: {fileID: 0}
   _flagPrefab: {fileID: 8835238663491218319, guid: d28095356bf9c4d28954fc4766de009d, type: 3}

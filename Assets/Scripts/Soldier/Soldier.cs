@@ -4,12 +4,14 @@ public class Soldier : MonoBehaviour
 {
     private float _speed;
     private bool _isDirected = false;
+    private bool _isDirectionNewBase = false;
     private Ore _ore;
     private Transform _targetTransform;
     private Transform _baseTransform;
     private Transform _transform;
 
     public bool IsDirected => _isDirected;
+    public bool IsDirectionNewBase => _isDirectionNewBase;
 
     private void Awake()
     {
@@ -34,6 +36,11 @@ public class Soldier : MonoBehaviour
             _isDirected = true;
             _targetTransform = targetTransform;
             _baseTransform = baseTransform;
+
+            if (targetTransform.TryGetComponent(out Flag flag) == true)
+            {
+                _isDirectionNewBase = true;
+            }
         }
     }
 
