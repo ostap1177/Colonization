@@ -1,15 +1,12 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ClickHandler : MonoBehaviour
 { 
     [SerializeField] private Camera _camera;
 
-    public event UnityAction<Vector3> GetedClickPoint;
-    public event UnityAction ClickedNotBase;
-
     private bool _isBaseTap = false;
     private Vector3 _hitPoint;
+    private Base _tempBase;
 
     private void Update()
     {
@@ -20,13 +17,19 @@ public class ClickHandler : MonoBehaviour
                 if (transformHit.TryGetComponent(out Base gameBase) == true)
                 {
                     _isBaseTap = true;
-                    gameBase.ClickedBase(_isBaseTap);
+                    _tempBase = gameBase;
+                    _tempBase.ClickedBase(_isBaseTap);
                 }
 
                 if (transformHit.TryGetComponent(out OreSpawn spawmTerritory) == true)
                 {
                     _isBaseTap = false;
-                    GetedClickPoint?.Invoke(_hitPoint);
+
+                    if (_tempBase != null)
+                    {
+                        _tempBase.GetClickPoint(_hitPoint);
+                        _tempBase.ClickedBase(_isBaseTap);
+                    }
                 }
             }
         }

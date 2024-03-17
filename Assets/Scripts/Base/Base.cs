@@ -5,14 +5,13 @@ using UnityEngine.Events;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] private ClickHandler _clickHandler;
     [SerializeField] private ScanLevelToRay _scanLevel;
-    [SerializeField] private OreCounter _oreCounterForBase;
+    [SerializeField] private OreCounter _oreCounter;
     [SerializeField] private SoldierSpawn _soldierSpawn;
-    [SerializeField] private Flag _flagPrefab;
+    [SerializeField] private PutFlug _putFlug;
     [SerializeField] private int _limitSoldiers;
-
-    //public event UnityAction CreatingNewBase;
+    [SerializeField] private int _oreCreateBase;
+    [SerializeField] private int _oreCreateSoldier;
 
     private Queue <Transform> _transformsOre;
 
@@ -21,12 +20,9 @@ public class Base : MonoBehaviour
 
     private Transform _transform;
     private Flag _flag;
-    private Transform _flagTransform;
 
     private bool _isClickOnBase = false;
     private bool _isPutFlag;
-    private bool _isSufficeCreatinSoldier;
-    private bool _isSufficeCreatinBase;
 
     private void Awake()
     {
@@ -43,23 +39,11 @@ public class Base : MonoBehaviour
     private void OnEnable()
     {
         _scanLevel.OreFounded += OnSpawnedOre;
-
-        _oreCounterForBase.ReachedCreateSoldiers += OnReachedCreateSoldiers;
-        _oreCounterForBase.ReachedCreateBase += OnReachedCreateBase;
-
-        _clickHandler.ClickedNotBase += OnClickedNotBase;
-        _clickHandler.GetedClickPoint += OnGetedClickPoint;
     }
 
     private void OnDisable()
     {
         _scanLevel.OreFounded -= OnSpawnedOre;
-
-        _oreCounterForBase.ReachedCreateSoldiers += OnReachedCreateSoldiers;
-        _oreCounterForBase.ReachedCreateBase += OnReachedCreateBase;
-
-        _clickHandler.ClickedNotBase -= OnClickedNotBase;
-        _clickHandler.GetedClickPoint -= OnGetedClickPoint;
     }
 
     private void Start()
@@ -72,29 +56,47 @@ public class Base : MonoBehaviour
         ControlSoldiers();
     }
 
+    public void ClickedBase(bool isBaseClicked)
+    {
+        _isClickOnBase = isBaseClicked;
+    }
+
+    public void GetClickPoint(Vector3 instalPosition)
+    {
+        if (_flag != null && _isClickOnBase == true)
+        {
+            if (_flag.gameObject.activeSelf == false)
+            {
+                _flag.gameObject.SetActive(true);
+
+                _flag.transform.position = instalPosition;
+                _isPutFlag = true;
+            }
+            else
+            {
+                _flag.transform.position = instalPosition;
+            }
+        }
+
+        _isClickOnBase = false;
+    }
+
     private void ControlSoldiers()
     {
         SendSodierOre();
 
         if (_isPutFlag == true && _soldiersAll.Count > 1)
         {
-            if (_isSufficeCreatinBase == true)
+            if (_oreCounter.CanSpawn(_oreCreateBase) == true)
             {
                 SendSodierCreatingBase();
             }
         }
         else
         {
-            if (_isSufficeCreatinSoldier == true && _soldiersAll.Count < _limitSoldiers)
+            if (_oreCounter.CanSpawn(_oreCreateSoldier) && _soldiersAll.Count < _limitSoldiers)
             {
                 AddedSoldier(_soldierSpawn.CreateSoldiers());
-
-                _oreCounterForBase.SubtractPoint(_oreCounterForBase.OreForCreateSoldier);
-                _isSufficeCreatinSoldier = false;
-            }
-            else if (_soldiersAll.Count == _limitSoldiers)
-            {
-                _isSufficeCreatinSoldier = false;
             }
         }
     }
@@ -125,15 +127,10 @@ public class Base : MonoBehaviour
         if (_soldiers.Count != 0 )
         {
             _isPutFlag = false;
-            _isSufficeCreatinBase = false;
-            _oreCounterForBase.SubtractPoint(_oreCounterForBase.OreForCreateBase);
+            _oreCounter.RemovePoint(_oreCreateBase);
 
             Soldier soldier = _soldiers.Dequeue();
-            _flag.PrepareNewBase(soldier);
             _soldiersAll.Remove(soldier);
-
-            _flag.transform.parent = null;
-            CreateFlag();
         }
     }
 
@@ -141,56 +138,17 @@ public class Base : MonoBehaviour
     {
         _soldiersAll.Add(soldier);
         _soldiers.Enqueue(soldier);
+        _oreCounter.RemovePoint(_oreCreateSoldier);
     }
 
     private void CreateFlag()
     {
-        _flag = Instantiate(_flagPrefab, _transform);
-        _flagTransform = _flag.transform;
+        _flag = _putFlug.CreteFlag(_transform.position);
         _flag.gameObject.SetActive(false);
-    }
-
-    public void ClickedBase(bool isBaseClicked)
-    {
-        _isClickOnBase = isBaseClicked;
-    }
-
-    private void OnReachedCreateBase()
-    {
-       _isSufficeCreatinBase = true;
-    }
-
-    private void OnReachedCreateSoldiers()
-    {
-        _isSufficeCreatinSoldier = true;
     }
 
     private void OnSpawnedOre(Transform transform)
     {
         _transformsOre.Enqueue(transform);
-    }
-
-    private void OnClickedNotBase()
-    {
-        _isClickOnBase = false;   
-    }
-
-    private void OnGetedClickPoint(Vector3 instalPosition)
-    {
-        if (_flag != null && _isClickOnBase == true)
-        {
-            if (_flag.gameObject.activeSelf == false)
-            {
-                _flag.gameObject.SetActive(true);
-                _flag.transform.position = instalPosition;
-                _isPutFlag = true;
-            }
-            else
-            {
-                _flag.transform.position = instalPosition;
-            }
-        }
-
-        _isClickOnBase = false;
     }
 }
