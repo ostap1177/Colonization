@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] private ScanLevelToRay _scanLevel;
+    [SerializeField] private LevelScaner _levelScan;
     [SerializeField] private OreCounter _oreCounter;
     [SerializeField] private SoldierSpawn _soldierSpawn;
-    [SerializeField] private FlugSpawner _flugSpawner;
+    [SerializeField] private Flag _flagPrefab;
     [SerializeField] private int _limitSoldiers;
     [SerializeField] private int _oreCreateBase;
     [SerializeField] private int _oreCreateSoldier;
@@ -18,7 +19,7 @@ public class Base : MonoBehaviour
 
     private Transform _transform;
     private Flag _flag;
-
+    
     private bool _isClickOnBase = false;
     private bool _isPutFlag;
 
@@ -31,17 +32,17 @@ public class Base : MonoBehaviour
 
         _limitSoldiers++;
 
-        CreateFlag();
+        SetFlag();
     }
 
     private void OnEnable()
     {
-        _scanLevel.OreFounded += OnSpawnedOre;
+        _levelScan.OreFounded += OnSpawnedOre;
     }
 
     private void OnDisable()
     {
-        _scanLevel.OreFounded -= OnSpawnedOre;
+        _levelScan.OreFounded -= OnSpawnedOre;
     }
 
     private void Start()
@@ -133,15 +134,15 @@ public class Base : MonoBehaviour
         _oreCounter.RemovePoint(_oreCreateSoldier);
     }
 
-    private void CreateFlag()
-    {
-        _flag = _flugSpawner.Crete(_transform.position);
-        _flag.transform.parent = _transform;
-        _flag.gameObject.SetActive(false);
-    }
-
     private void OnSpawnedOre(Transform transform)
     {
         _transformsOre.Enqueue(transform);
+    }
+
+    private void SetFlag()
+    {
+        _flag = Instantiate(_flagPrefab, _transform);
+        _flag.transform.parent = _transform;
+        _flag.gameObject.SetActive(false);
     }
 }

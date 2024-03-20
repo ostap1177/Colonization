@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
-    [SerializeField] SpawnBase _spawnBase;
+    [SerializeField] BaseSpawner _spawnBase;
 
     private Transform _transform;
 

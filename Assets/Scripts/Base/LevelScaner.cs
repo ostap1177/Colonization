@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ScanLevelToRay : MonoBehaviour
+public class LevelScaner : MonoBehaviour
 {
     [SerializeField] private float _scanDistance;
     [SerializeField] private float _scanSpeed = 0.5f;

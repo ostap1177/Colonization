@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class DisplayOre : MonoBehaviour
+public class OreDisplay : MonoBehaviour
 {
     [SerializeField] private OreCounter _oreCounter;
     [SerializeField] private TMP_Text _text;
