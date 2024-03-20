@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &453252320 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1016459954, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
-  m_PrefabInstance: {fileID: 9140753625883120368}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7573411ea0a8940c59ee0cba9f4e7336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +455,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 56002761, guid: 963a8f66337c5422c92a6cf77ad99755, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 963a8f66337c5422c92a6cf77ad99755, type: 3}
 --- !u!1001 &9140753625883120368
 PrefabInstance:
@@ -479,10 +469,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 707725971645508663, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
-      propertyPath: _levelScan
-      value: 
-      objectReference: {fileID: 453252320}
     - target: {fileID: 9140753625973010834, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
       propertyPath: m_Name
       value: Base
@@ -531,6 +517,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2133598565, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 822ed4f17a93e43509f5c96e19b2ef9a, type: 3}
