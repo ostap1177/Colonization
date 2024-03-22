@@ -19,8 +19,8 @@ public class Base : MonoBehaviour
 
     private Transform _transform;
     private Flag _flag;
-    
-    private bool _isClickOnBase = false;
+
+    private bool _isClickOnBase;
     private bool _isPutFlag;
 
     private void Awake()
@@ -32,17 +32,17 @@ public class Base : MonoBehaviour
 
         _limitSoldiers++;
 
-        SetFlag();
+        InstalFlag();
     }
 
     private void OnEnable()
     {
-        _levelScan.OreFounded += OnSpawnedOre;
+        _levelScan.OreFounded += OnOreFounded;
     }
 
     private void OnDisable()
     {
-        _levelScan.OreFounded -= OnSpawnedOre;
+        _levelScan.OreFounded -= OnOreFounded;
     }
 
     private void Start()
@@ -55,12 +55,12 @@ public class Base : MonoBehaviour
         ControlSoldiers();
     }
 
-    public void ClickedBase(bool isBaseClicked)
+    public void ClickOnBase(bool isBaseClicked)
     {
         _isClickOnBase = isBaseClicked;
     }
 
-    public void GetClickPoint(Vector3 instalPosition)
+    public void TakeClickPoint(Vector3 instalPosition)
     {
         if (_flag != null && _isClickOnBase == true)
         {
@@ -80,14 +80,14 @@ public class Base : MonoBehaviour
 
         if (_isPutFlag == true && _soldiersAll.Count > 1)
         {
-            if (_oreCounter.CanSpawn(_oreCreateBase) == true)
+            if (_oreCounter.IsSufficePoint(_oreCreateBase) == true)
             {
                 SendSodierCreatingBase();
             }
         }
         else
         {
-            if (_oreCounter.CanSpawn(_oreCreateSoldier) && _soldiersAll.Count < _limitSoldiers)
+            if (_oreCounter.IsSufficePoint(_oreCreateSoldier) && _soldiersAll.Count < _limitSoldiers)
             {
                 AddedSoldier(_soldierSpawn.CreateSoldiers());
             }
@@ -124,6 +124,7 @@ public class Base : MonoBehaviour
             Soldier soldier = _soldiers.Dequeue();
             _soldiersAll.Remove(soldier);
             soldier.SetDirection(_flag.transform,_transform);
+            _isPutFlag = false; 
         }
     }
 
@@ -134,12 +135,12 @@ public class Base : MonoBehaviour
         _oreCounter.RemovePoint(_oreCreateSoldier);
     }
 
-    private void OnSpawnedOre(Transform transform)
+    private void OnOreFounded(Transform transform)
     {
         _transformsOre.Enqueue(transform);
     }
 
-    private void SetFlag()
+    private void InstalFlag()
     {
         _flag = Instantiate(_flagPrefab, _transform);
         _flag.transform.parent = _transform;

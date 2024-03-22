@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Collider))]
 public class OreCounter : MonoBehaviour
 {
     private int _oreCountPoint = 1;
 
-    public event UnityAction<int> ShowOrePoint;
+    public event UnityAction<int> ChangedOrePoint;
 
     private void OnTriggerEnter(Collider trigger)
     {
@@ -15,12 +15,12 @@ public class OreCounter : MonoBehaviour
             if (soldier.IsDirected == true && soldier.GetComponentInChildren<Ore>(true))
             {
                 _oreCountPoint++;
-                ShowOrePoint?.Invoke(_oreCountPoint);
+                ChangedOrePoint?.Invoke(_oreCountPoint);
             }
         }
     }
 
-    public bool CanSpawn(int point)
+    public bool IsSufficePoint(int point)
     {
         return _oreCountPoint > point;
     }
@@ -28,6 +28,6 @@ public class OreCounter : MonoBehaviour
     public void RemovePoint(int point)
     {
         _oreCountPoint -= point;
-        ShowOrePoint(_oreCountPoint);
+        ChangedOrePoint(_oreCountPoint);
     }
 }

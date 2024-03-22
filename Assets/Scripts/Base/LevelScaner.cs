@@ -30,7 +30,7 @@ public class LevelScaner : MonoBehaviour
         {
             if (hit.transform.TryGetComponent(out Ore ore) == true && ore.IsScanned == false)
             {
-                ore.IsScaning();
+                ore.Scan();
                 OreFounded?.Invoke(ore.transform);
             }
         }

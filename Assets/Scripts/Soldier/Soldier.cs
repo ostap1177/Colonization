@@ -24,6 +24,23 @@ public class Soldier : MonoBehaviour
         Move();
     }
 
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (_ore == null && collider.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
+        {   
+            ore.Take();
+            ore.gameObject.transform.parent = _transform;
+            _ore = ore;
+            _targetTransform = _baseTransform;
+        }
+
+        if (collider.TryGetComponent(out OreCounter oreCounter) == true && _ore !=null && IsMatchParent(oreCounter.transform)==true)
+        {
+            _isDirected = false;
+            _ore.DestroyOre();
+        }
+    }
+
     public void SetSpeed(float speed)
     {
         _speed = speed;
@@ -52,20 +69,8 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private bool IsMatchParent(Transform transform)
     {
-        if (_ore == null && collider.TryGetComponent(out Ore ore) == true && ore.IsDelivered==false)
-        {   
-            ore.IsTaken();
-            ore.gameObject.transform.parent = _transform;
-            _ore = ore;
-            _targetTransform = _baseTransform;
-        }
-
-        if (collider.TryGetComponent(out OreCounter oreCounter) == true && _ore !=null)
-        {
-            _isDirected = false;
-            _ore.DestroyOre();
-        }
+        return _transform.parent == transform.parent;
     }
 }

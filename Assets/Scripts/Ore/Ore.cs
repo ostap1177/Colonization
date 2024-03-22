@@ -5,12 +5,12 @@ public class Ore : MonoBehaviour
     public bool IsDelivered { get; private set;}
     public bool IsScanned { get; private set;}
 
-    public void IsTaken()
+    public void Take()
     {
         IsDelivered = true;
     }
 
-    public void IsScaning()
+    public void Scan()
     {
         IsScanned = true;
     }

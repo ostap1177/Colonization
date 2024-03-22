@@ -13,12 +13,9 @@ public class OreSpawn : MonoBehaviour
     private int _childCountOnStart;
     private Vector3 _spawnBound;
     private float _transformOreY;
-    private bool _isSpawnDelay;
 
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _waitForSeconds;
-
-    public event UnityAction<Transform> OreSpawned;
 
     private void Awake()
     {
@@ -31,12 +28,9 @@ public class OreSpawn : MonoBehaviour
         _transformOreY = -0.5f;
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        if (_transform.childCount < _oreLimit+_childCountOnStart && _isSpawnDelay == false)
-        {
-            Spawn();
-        }
+        Spawn();
     }
 
     private void Spawn()
@@ -51,20 +45,21 @@ public class OreSpawn : MonoBehaviour
 
     private IEnumerator DelaySpawnOre()
     {
-        _isSpawnDelay = true;
+        while (true)
+        {
+            SpawnOre(GetSpawtPosition());
 
-        yield return _waitForSeconds;
-
-        SpawnOre(GetSpawtPosition());
-        _isSpawnDelay = false;
+            yield return _waitForSeconds;
+        }
     }
 
     private void SpawnOre(Vector3 spawtPosition)
     {
-        Ore ore = Instantiate(_ore, spawtPosition, Quaternion.identity);
-        ore.transform.parent = _transform;
-
-        OreSpawned?.Invoke(ore.gameObject.transform);
+        if (_transform.childCount < _oreLimit + _childCountOnStart)
+        {
+            Ore ore = Instantiate(_ore, spawtPosition, Quaternion.identity);
+            ore.transform.parent = _transform;
+        }
     }
 
     private Vector3 GetSpawtPosition()

@@ -8,12 +8,12 @@ public class OreDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        _oreCounter.ShowOrePoint += OnShowOrePoint;
+        _oreCounter.ChangedOrePoint += OnShowOrePoint;
     }
 
     private void OnDisable()
     {
-        _oreCounter.ShowOrePoint += OnShowOrePoint;
+        _oreCounter.ChangedOrePoint += OnShowOrePoint;
     }
 
     private void Start()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
-    [SerializeField] BaseSpawner _spawnBase;
+    [SerializeField] BaseSpawner _spawnerBase;
 
     private Transform _transform;
 
@@ -20,7 +20,7 @@ public class Flag : MonoBehaviour
     {
         if (trigger.TryGetComponent(out Soldier soldier) == true && soldier.IsDirectionNewBase == true)
         {
-            Base newBase = _spawnBase.Create(_transform.position);
+            Base newBase = _spawnerBase.Create(_transform.position);
             soldier.transform.parent = newBase.transform;
             _transform.gameObject.SetActive(false);
         }
